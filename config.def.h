@@ -2,6 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -19,7 +20,7 @@ static const char col_selectedtext[]= "#ffffff";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray2, col_gray1, col_gray5 },
-	[SchemeSel]  = { col_selectedtext, col_gray1,  col_gray4  },
+	[SchemeSel]  = { col_selectedtext, col_gray1,  col_gray2  },
 };
 
 /* tagging */
@@ -106,6 +107,10 @@ static const Key keys[] = {
 	// Custom keybinds:
 	{ MODKEY,						XK_minus,	    spawn,			SHCMD("pamixer --decrease 5; kill -39 $(pidof slstatus)") },
 	{ MODKEY,						XK_equal,	    spawn,			SHCMD("pamixer --increase 5; kill -39 $(pidof slstatus)") },
+	{ MODKEY,                       XK_F9,  		setgaps,        {.i = +5 } },
+	{ MODKEY,                       XK_F10,  		setgaps,        {.i = -5 } },
+	{ MODKEY,             			XK_F11,  		setgaps,        {.i = GAP_RESET } },
+	{ MODKEY,             			XK_F12,  		setgaps,        {.i = GAP_TOGGLE} },
 	{ MODKEY,             			XK_c,      	    killclient,     {0} },
 	{ MODKEY,                       XK_s,      	    togglesticky,   {0} },
 	{ MODKEY,						XK_semicolon,   shiftview,		{.i = -1}},
